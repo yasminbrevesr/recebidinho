@@ -16,27 +16,31 @@ precacheAndRoute(self.__WB_MANIFEST)
 registerRoute(new NavigationRoute(createHandlerBoundToURL('index.html')))
 
 // Conteúdo esperado do push (enviado pelas Edge Functions), em JSON:
-//   { "titulo": "...", "corpo": "...", "url": "/morador", "tag": "encomenda-<id>" }
+//   { "titulo": "...", "corpo": "...", "url": "morador", "tag": "encomenda-<id>" }
+// "url" é relativa ao app (sem barra no início), porque o app pode estar
+// numa pasta, como no GitHub Pages (/recebidinho/).
 // Se vier texto simples, ele vira o corpo da notificação.
 // No iPhone, todo push PRECISA mostrar uma notificação, senão o iOS
 // cancela a permissão; por isso sempre mostramos algo.
+const raizDoApp = self.registration.scope
+
 self.addEventListener('push', (event) => {
   const dados = lerDados(event)
 
   event.waitUntil(
     self.registration.showNotification(dados.titulo || 'Recebidinho', {
       body: dados.corpo || 'Há uma novidade sobre a sua encomenda.',
-      icon: '/icons/icon-192.png',
-      badge: '/icons/badge-96.png',
+      icon: new URL('icons/icon-192.png', raizDoApp).href,
+      badge: new URL('icons/badge-96.png', raizDoApp).href,
       tag: dados.tag,
-      data: { url: dados.url || '/morador' },
+      data: { url: dados.url || 'morador' },
     }),
   )
 })
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close()
-  const url = new URL(event.notification.data?.url || '/morador', self.location.origin).href
+  const url = new URL(event.notification.data?.url || 'morador', raizDoApp).href
   event.waitUntil(abrirTela(url))
 })
 

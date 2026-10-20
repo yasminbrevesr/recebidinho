@@ -112,50 +112,46 @@ os avisos de novo.
 
 Não é preciso cadastrar a chave secreta do Supabase (a antiga *service role
 key*): as Edge Functions já recebem essa chave automaticamente. Ela nunca deve
-ir para o app nem para a Vercel.
+ir para o app nem para o GitHub.
 
-## 7. Publicar o app na Vercel
+## 7. Publicar o app no GitHub Pages
 
-1. Acesse <https://vercel.com> → **Sign Up** → **Continue with GitHub**, usando a
-   conta do GitHub que tem acesso ao repositório `recebidinho`.
-2. Clique em **Add New…** → **Project** e, na lista, clique em **Import** ao lado
-   de `recebidinho`. (Se ele não aparecer, clique em **Adjust GitHub App
-   Permissions** e libere o repositório.)
-3. Na tela de configuração:
-   - **Root Directory:** clique em **Edit** e escolha a pasta `frontend`.
-   - **Framework Preset:** `Vite` (vem selecionado sozinho). Não mexa em Build
-     Command nem Output Directory.
-   - **Environment Variables:** adicione as duas variáveis abaixo.
+O app é publicado sozinho a cada alteração na branch `main`, pelo workflow
+`.github/workflows/publicar-github-pages.yml`. Só é preciso configurar uma vez:
 
-     | Name                            | Value |
-     | ------------------------------- | ----- |
-     | `VITE_SUPABASE_URL`             | URL do projeto, ex.: `https://abcd1234.supabase.co` |
-     | `VITE_SUPABASE_PUBLISHABLE_KEY` | a *Publishable key*, começa com `sb_publishable_` |
+1. No GitHub, abra o repositório → **Settings** → **Pages**. Em **Build and
+   deployment** → **Source**, escolha **GitHub Actions**.
+2. Ainda em **Settings**: **Secrets and variables** → **Actions** → aba
+   **Variables** → **New repository variable**. Crie as duas:
 
-     Onde encontrar no Supabase: botão **Connect** no topo do projeto, ou
-     **Project Settings** → **API Keys** (chave) e **Project Settings** →
-     **Data API** (URL). A *publishable key* é a substituta da antiga *anon
-     key* e pode ficar no app. **Nunca** use aqui a *Secret key*
-     (`sb_secret_...`).
-4. Clique em **Deploy** e aguarde cerca de 1 minuto. A Vercel mostra o endereço
-   do app (ex.: `https://recebidinho.vercel.app`).
+   | Name                            | Value |
+   | ------------------------------- | ----- |
+   | `VITE_SUPABASE_URL`             | URL do projeto, ex.: `https://abcd1234.supabase.co` |
+   | `VITE_SUPABASE_PUBLISHABLE_KEY` | a *Publishable key*, começa com `sb_publishable_` |
 
-Se mudar alguma variável depois, é preciso publicar de novo: **Deployments** →
-menu **⋯** do último → **Redeploy**.
+   Onde encontrar no Supabase: botão **Connect** no topo do projeto, ou
+   **Project Settings** → **API Keys**. A *publishable key* é a substituta da
+   antiga *anon key* e pode ficar no app. **Nunca** use aqui a *Secret key*
+   (`sb_secret_...`).
+3. Aba **Actions** → **Publicar no GitHub Pages** → **Run workflow** → **Run
+   workflow**. Em uns 2 minutos o círculo fica verde.
+4. Endereço do app: `https://<usuario-do-github>.github.io/recebidinho/`.
+
+Se mudar alguma variável depois, rode o passo 3 de novo para publicar.
 
 ## 8. Informar o endereço do app ao Supabase
 
 1. No Supabase: **Authentication** → **URL Configuration**.
-2. Em **Site URL**, coloque o endereço da Vercel (ex.:
-   `https://recebidinho.vercel.app`) e clique em **Save**.
+2. Em **Site URL**, coloque o endereço do app (ex.:
+   `https://usuario.github.io/recebidinho/`) e clique em **Save**.
 
 Isso será usado nos e-mails de troca de senha da equipe.
 
 ## 9. Conferir o app publicado
 
-1. Abra o endereço da Vercel. Deve aparecer **Recebidinho** e a linha
+1. Abra o endereço do app. Deve aparecer **Recebidinho** e a linha
    **Supabase: configurado**. Se aparecer "NÃO configurado", revise as variáveis
-   do passo 7 e faça o **Redeploy**.
+   do passo 7 e publique de novo.
 2. Toque em cada tela da lista: todas abrem com o título e "Em construção".
 3. Instalação no celular:
    - **Android (Chrome):** menu **⋮** → **Instalar app** (ou **Adicionar à tela
@@ -184,6 +180,6 @@ Isso será usado nos e-mails de troca de senha da equipe.
 - **Limites do plano gratuito do Supabase** (folgados para um condomínio): 500 MB
   de banco e 1 GB de arquivos. As fotos são pequenas e apagadas 30 dias após a
   retirada.
-- **Plano gratuito da Vercel (Hobby):** pelas regras da Vercel, é para uso não
-  comercial. Como o app é um site estático, ele pode ser movido para outra
-  hospedagem gratuita sem mudar o código, se for preciso.
+- **Hospedagem:** o app é um site estático. Para trocar o GitHub Pages por outra
+  hospedagem (ex.: Vercel, que usa o `frontend/vercel.json`), não é preciso mudar
+  o código: basta publicar a pasta `frontend` com as mesmas variáveis.

@@ -5,7 +5,7 @@ o morador recebe um aviso no celular (Web Push, sem custo por mensagem) e, na
 retirada, o porteiro dá baixa com o código de 4 dígitos.
 
 Roda em planos gratuitos: **Supabase** (banco, login, fotos, Edge Functions) e
-**Vercel** (hospedagem do app).
+**GitHub Pages** (hospedagem do app).
 
 ## Estrutura
 
@@ -14,7 +14,7 @@ recebidinho/
 ├── frontend/                 App PWA (React + Vite + vite-plugin-pwa)
 │   ├── index.html
 │   ├── vite.config.js        Manifesto do PWA e configuração do service worker
-│   ├── vercel.json           Faz as rotas (/portaria, /morador...) abrirem o app
+│   ├── vercel.json           Para publicar na Vercel, se trocar de hospedagem
 │   ├── .env.example          Variáveis de ambiente (copiar para .env.local)
 │   ├── public/               Ícones e favicon (provisórios)
 │   └── src/
@@ -26,8 +26,9 @@ recebidinho/
 ├── supabase/
 │   ├── migrations/           SQL do banco (tabelas, índices, RLS, bucket de fotos)
 │   └── functions/            Edge Functions (próximas etapas)
+├── .github/workflows/        Publicação automática no GitHub Pages
 └── docs/
-    └── configuracao.md       Passo a passo: Supabase, chaves VAPID e Vercel
+    └── configuracao.md       Passo a passo: Supabase, chaves VAPID e publicação
 ```
 
 ## Rodar no computador
