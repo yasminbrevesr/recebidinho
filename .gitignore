@@ -1,0 +1,13 @@
+node_modules/
+dist/
+dev-dist/
+.vercel/
+
+# Variáveis de ambiente com valores reais (nunca versionar)
+.env
+.env.local
+.env.*.local
+supabase/.temp/
+supabase/functions/.env
+
+.DS_Store
