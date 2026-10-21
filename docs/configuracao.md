@@ -34,7 +34,7 @@ administrador. Moradores não usam login.
 ## 3. Rodar a migration (criar as tabelas)
 
 1. No GitHub, abra o arquivo
-   `supabase/migrations/20261020120000_estrutura_inicial.sql` e copie todo o
+   `supabase/migrations/20261020235910_estrutura_inicial.sql` e copie todo o
    conteúdo (botão **Copy raw file**).
 2. No Supabase: menu lateral → **SQL Editor** → **New query**.
 3. Cole o conteúdo e clique em **Run**.
