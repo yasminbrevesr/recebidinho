@@ -149,10 +149,12 @@ Isso será usado nos e-mails de troca de senha da equipe.
 
 ## 9. Conferir o app publicado
 
-1. Abra o endereço do app. Deve aparecer **Recebidinho** e a linha
-   **Supabase: configurado**. Se aparecer "NÃO configurado", revise as variáveis
-   do passo 7 e publique de novo.
-2. Toque em cada tela da lista: todas abrem com o título e "Em construção".
+1. Abra o endereço do app. Deve aparecer a tela de **login**. Se aparecer o aviso
+   vermelho "O app está sem a configuração do Supabase", revise as variáveis do
+   passo 7 e publique de novo.
+2. Entre com um login da equipe (veja abaixo). A portaria cai na tela
+   **Encomendas** e o síndico em **Cadastros de moradores**, com o nome e o
+   condomínio no topo. O botão **Sair** volta para o login.
 3. Instalação no celular:
    - **Android (Chrome):** menu **⋮** → **Instalar app** (ou **Adicionar à tela
      inicial**).
@@ -169,6 +171,32 @@ Isso será usado nos e-mails de troca de senha da equipe.
       tela do morador.
    4. Se nada aparecer, confira se as notificações do Chrome estão permitidas nas
       configurações do Windows/Mac.
+
+## 10. Criar os logins da equipe
+
+Cada login é um usuário do Supabase ligado a um registro na tabela `equipe`.
+
+1. No Supabase: **Authentication** → **Users** → **Add user** → **Create new
+   user**. Informe o e-mail e a senha, marque **Auto Confirm User** e clique em
+   **Create user**. Faça um para a portaria e um para o síndico.
+2. Ligue cada usuário ao condomínio no **SQL Editor** (troque os textos entre
+   aspas):
+
+   ```sql
+   insert into public.condominios (nome) values ('Nome do Condomínio');
+
+   insert into public.equipe (id, condominio_id, nome, papel)
+   select u.id, c.id, 'Portaria', 'portaria'
+   from auth.users u, public.condominios c
+   where u.email = 'portaria@exemplo.com' and c.nome = 'Nome do Condomínio';
+
+   insert into public.equipe (id, condominio_id, nome, papel)
+   select u.id, c.id, 'Nome do Síndico', 'sindico'
+   from auth.users u, public.condominios c
+   where u.email = 'sindico@exemplo.com' and c.nome = 'Nome do Condomínio';
+   ```
+
+Para desativar um login, mude `ativo` para `false` na tabela `equipe`.
 
 ---
 

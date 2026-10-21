@@ -1,8 +1,15 @@
+import PainelEquipe from '../components/PainelEquipe.jsx'
+import EmBreve from '../components/EmBreve.jsx'
+import { IconePrancheta } from '../components/icones.jsx'
+
 export default function Sindico() {
   return (
-    <main className="pagina">
-      <h1>Síndico</h1>
-      <p className="suave">Em construção.</p>
-    </main>
+    <PainelEquipe titulo="Cadastros de moradores">
+      <EmBreve
+        icone={<IconePrancheta tamanho={32} />}
+        titulo="Aprovação de cadastros em breve"
+        texto="Aqui o síndico vai aprovar ou recusar os cadastros feitos pelos moradores."
+      />
+    </PainelEquipe>
   )
 }
