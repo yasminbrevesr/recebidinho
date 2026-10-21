@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Navigate } from 'react-router'
+import { Link, Navigate } from 'react-router'
 import { Carregando, painelDe, useAuth } from '../lib/auth.jsx'
 import { supabaseConfigurado } from '../lib/supabase.js'
 import Marca from '../components/Marca.jsx'
@@ -90,6 +90,10 @@ export default function Login() {
 
         <p className="login-rodape">Esqueceu a senha? Fale com o síndico.</p>
       </form>
+
+      <Link to="/demo" className="link-demo">
+        Ver demonstração com dados fictícios
+      </Link>
     </div>
   )
 }

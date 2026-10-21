@@ -42,3 +42,36 @@ export const IconeOlhoFechado = (p) => (
     <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" />
   </Icone>
 )
+
+export const IconeCamera = (p) => (
+  <Icone {...p}>
+    <path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z" />
+    <circle cx="12" cy="13.5" r="3.5" />
+  </Icone>
+)
+
+export const IconeBusca = (p) => (
+  <Icone {...p}>
+    <circle cx="11" cy="11" r="7" />
+    <path d="m20 20-4-4" />
+  </Icone>
+)
+
+export const IconeCheck = (p) => (
+  <Icone {...p}>
+    <path d="m5 12.5 4.5 4.5L19 7.5" />
+  </Icone>
+)
+
+export const IconeSinoCortado = (p) => (
+  <Icone {...p}>
+    <path d="M3 3l18 18M8.5 5.2A6 6 0 0 1 18 11v4M6 11v5l-1.5 2H16" />
+    <path d="M10 20a2 2 0 0 0 4 0" />
+  </Icone>
+)
+
+export const IconeDownload = (p) => (
+  <Icone {...p}>
+    <path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14" />
+  </Icone>
+)

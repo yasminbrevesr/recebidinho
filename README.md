@@ -21,7 +21,9 @@ recebidinho/
 │       ├── main.jsx          Ponto de entrada
 │       ├── App.jsx           Rotas
 │       ├── sw.js             Service worker: cache do app + recebimento de push
-│       ├── lib/supabase.js   Cliente do Supabase (só a publishable key)
+│       ├── lib/              Supabase, login da equipe, formatação de datas
+│       ├── components/       Peças de tela reaproveitáveis (listas, formulários)
+│       ├── demo/             Modo demonstração com dados fictícios (/demo)
 │       └── pages/            Uma tela por arquivo
 ├── supabase/
 │   ├── migrations/           SQL do banco (tabelas, índices, RLS, bucket de fotos)
@@ -30,6 +32,12 @@ recebidinho/
 └── docs/
     └── configuracao.md       Passo a passo: Supabase, chaves VAPID e publicação
 ```
+
+## Demonstração
+
+Em `/demo` o app mostra as telas da portaria, do síndico e do morador
+funcionando com dados fictícios, sem usar o banco. Útil para validar o visual e o
+fluxo antes de cada função ser ligada ao Supabase.
 
 ## Rodar no computador
 

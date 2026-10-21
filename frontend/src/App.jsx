@@ -6,6 +6,10 @@ import Morador from './pages/Morador.jsx'
 import Portaria from './pages/Portaria.jsx'
 import Sindico from './pages/Sindico.jsx'
 import Login from './pages/Login.jsx'
+import DemoInicio from './demo/DemoInicio.jsx'
+import DemoPortaria from './demo/DemoPortaria.jsx'
+import DemoSindico from './demo/DemoSindico.jsx'
+import DemoMorador from './demo/DemoMorador.jsx'
 
 export default function App() {
   return (
@@ -31,6 +35,11 @@ export default function App() {
             </SomenteEquipe>
           }
         />
+        {/* Demonstração com dados fictícios (não usa o banco) */}
+        <Route path="/demo" element={<DemoInicio />} />
+        <Route path="/demo/portaria" element={<DemoPortaria />} />
+        <Route path="/demo/sindico" element={<DemoSindico />} />
+        <Route path="/demo/morador" element={<DemoMorador />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AuthProvider>
